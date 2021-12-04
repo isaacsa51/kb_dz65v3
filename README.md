@@ -115,12 +115,12 @@ The Leader Key on this layout is triggered by tapping the Capslock key once. Onc
 
 ### Spanish Accents (to be added)
 
-| Output                               | Sequence  | Description                                      |
-| :----------------------------------- | :-------- | :----------------------------------------------- |
-| `à`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `À`¶ | `LDR A`   | Will output upper character if Capslock enabled. |
-| `é`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `É`¶ | `LDR /`   | Will output upper character if Capslock enabled  |
-| `ó`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `Ó`¶ | `LDR O O` | Will output upper character if Capslock enabled. |
-| `ú`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `Ú`¶ | `LDR U`   | Will output upper character if Capslock enabled. |
+| Output                               | Sequence | Description                                      |
+| :----------------------------------- | :------- | :----------------------------------------------- |
+| `à`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `À`¶ | `LDR A`  | Will output upper character if Capslock enabled. |
+| `é`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `É`¶ | `LDR E`  | Will output upper character if Capslock enabled  |
+| `ó`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `Ó`¶ | `LDR O`  | Will output upper character if Capslock enabled. |
+| `ú`¶ &nbsp;&nbsp;or&nbsp;&nbsp; `Ú`¶ | `LDR U`  | Will output upper character if Capslock enabled. |
 
 ### Special Characters and Punctuation
 
