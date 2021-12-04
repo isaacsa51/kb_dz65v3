@@ -1,3 +1,20 @@
+/**************** LAYOUT *********************/
+/*
+[LEDS]
+ 0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14
+15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29
+30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,       42,  43
+44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,       56,  57
+58,  59,  60,            61,                 62,  63,  64,  65,  66,  67
+
+[KEYS]
+ESC, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   -,   =,  BCK, INS
+TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   [,   ],    \,PGUP
+CPS, A,   S,   D,   F,   G,   H,   J,   K,   L,   COL, QOT,  RETURN,PGDN
+SFT, Z,   X,   C,   V,   B,   N,   M,   COM, DOT, SLS, SHIFT,    UP, DEL
+CTL, OS, ALT,            SPACEBAR,           ALT, FN, CTL, LFT, DWN, RIT
+*/
+
 #include QMK_KEYBOARD_H
 
 /**************** SOME GLOBALS *********************/
@@ -71,25 +88,6 @@ void get_this_led_blinking(uint8_t led_index, bool speed, uint8_t hue, uint8_t s
     }
 }
 
-
-/**************** LAYOUT *********************/
-
-/*
-[LEDS]
- 0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14
-15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29
-30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,       42,  43
-44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,       56,  57
-58,  59,  60,            61,                 62,  63,  64,  65,  66,  67
-
-[KEYS]
-ESC, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   -,   =,  BCK, INS
-TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   [,   ],    \,PGUP
-CPS, A,   S,   D,   F,   G,   H,   J,   K,   L,   COL, QOT,  RETURN,PGDN
-SFT, Z,   X,   C,   V,   B,   N,   M,   COM, DOT, SLS, SHIFT,    UP, DEL
-CTL, GUI, ALT,           SPACEBAR,           ALT, FN, CTL, LFT, DWN, RIT
-*/
-
 enum layers {
     _MAIN,
     _FN
@@ -113,12 +111,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_SAD, RGB_SAI, DYN_MACRO_PLAY2, DYN_REC_START2, 
         KC_TRNS, KC_MPRV, KC_MUTE, KC_MNXT, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_HUD, RGB_HUI, DYN_MACRO_PLAY1, DYN_REC_START1, 
         KC_TRNS, KC_VOLD, KC_MPLY, KC_VOLU, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, RGB_SPD, RGB_SPI, KC_TRNS, RGB_VAI, KC_NO, 
-        KC_TRNS, KC_TRNS, KC_TRNS, TO(_MAC), KC_TRNS, KC_TRNS, KC_TRNS, RGB_RMOD, RGB_VAD, RGB_MOD
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_RMOD, RGB_VAD, RGB_MOD
     ),
 }; 
 
 //**************** MATRIX SCANS *********************//
-
 void rgb_matrix_indicators_user(void) { 
 
     #ifdef RGB_MATRIX_ENABLE
@@ -130,9 +127,6 @@ void rgb_matrix_indicators_user(void) {
     if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
         rgb_matrix_set_color_hsv(30, 999, 0, led_constant_val, 0.75); // WHITE
     } 
-
-    /* Current layer LED indicator */
-    // rgb_matrix_set_color_hsv(layers_leds_map[get_highest_layer(layer_state)], 999, 0, led_constant_val, led_dim_ratio); // WHITE
 
     /* Leader Key LED under-glow */
     if (isLeader) {
@@ -173,47 +167,77 @@ void rgb_matrix_indicators_user(void) {
             rgb_matrix_set_color_hsv(47, 999, 0, led_constant_val, led_dim_ratio);
             rgb_matrix_set_color_hsv(53, 999, 0, led_constant_val, led_dim_ratio);
             rgb_matrix_set_color_hsv(54, 999, 0, led_constant_val, led_dim_ratio);
-            rgb_matrix_set_color_hsv(61, 999, 0, led_constant_val, led_dim_ratio);
             break; 
     }
 
-    #endif /* RGB_MATRIX */
+    #endif 
 }
  
 //**************** LEADER *********************//
-
 #ifdef LEADER_ENABLE
 
 /******* SPANISH ACCENT HELPER FUNCTIONS & DECLARATIONS *************/
-// enum spanish_letter {
-//     _A,
-//     _E,
-//     _I,
-//     _O,
-//     _U,
-//     _N
-// };
+enum spanish_letter {
+    _A,
+    _E,
+    _I,
+    _O,
+    _U,
+    _N
+};
 
-// const uint8_t french_letter_index[6] = {
-//     [_A] = 0,
-//     [_E] = 1,
-//     [_I] = 2,
-//     [_O] = 3,
-//     [_U] = 4,
-//     [_N] = 5
-// };
+const uint8_t spanish_letter_index[6] = {
+    [_A] = 0,
+    [_E] = 1,
+    [_I] = 2,
+    [_O] = 3,
+    [_U] = 4,
+    [_N] = 5
+};
 
-// enum french_accent {
-//     _CIRCUMFLEX,
-//     _GRAVE,
-//     _ACUTE
-// };
+enum spanish_accent {
+    _CUTE,
+    _TILDE
+};
 
-// const uint8_t french_accent_index[3] = {
-//     [_CIRCUMFLEX] = 0,
-//     [_GRAVE] = 1,
-//     [_ACUTE] = 2
-// };
+const uint8_t spanish_accent_index[2] = {
+    [_CUTE] = 0,
+    [_TILDE] = 1
+};
+
+const uint8_t spanish_decimal_unicodes[6][3][2] = { /*[Letter][Accent][Case]*/
+    {
+        {
+            160,    // á
+            193     // Á
+        }
+    },{
+        {
+            130,    // é
+            201     // É
+        }
+    },{
+        {
+            161,    // í
+            205     // Í 
+        }
+    },{
+        {
+            162,    // ó
+            211     // Ó
+        }
+    },{
+        {
+            163,    // ú
+            218     // Ú
+        }
+    },{
+        {
+            241,    //ñ
+            209     //Ñ
+        }
+    }
+};
 
 void break_int_in_array(uint8_t int_code, uint8_t size, uint8_t *array) {
     uint8_t i;
@@ -224,6 +248,70 @@ void break_int_in_array(uint8_t int_code, uint8_t size, uint8_t *array) {
         int_code /= 10;
     }
 }
+
+void send_spanish_accent(uint8_t letter, uint8_t accent) {
+    bool isCaps;
+    uint8_t decimal_unicode_in;
+    uint8_t decimal_unicode_size = 3;
+    uint8_t decimal_unicode_out[decimal_unicode_size];
+
+    /*Map to numpad keycodes*/
+    const uint16_t numpad_key_map[10] = {
+        KC_P0, KC_P1, KC_P2, KC_P3, KC_P4, KC_P5, KC_P6, KC_P7, KC_P8, KC_P9
+    };
+
+    /*Map to letter keycodes*/
+    const uint16_t spanish_letter_key_map[6] = {
+        KC_A, KC_E, KC_I, KC_O, KC_U, KC_N
+    };
+
+    /*Map to mod keys for spanish Mac shortcuts*/
+    const uint16_t osx_mod_key_map[2] = {
+        KC_I, 
+        KC_E 
+    };
+
+    /*
+    Function to tap the correct keycodes in sequence for the 
+    "Windows Alt Code" requested, aka Decimal Unicodes
+    */
+    void tap_win_alt_code(void) {
+        if (isCaps) {
+            tap_code(numpad_key_map[0]); // Leading 0 on all upper case "Windows alt codes"
+        }
+        for (int i = 0; i < decimal_unicode_size; ++i) {
+            tap_code(numpad_key_map[decimal_unicode_out[i]]);
+        }
+    }
+    
+    isCaps = IS_HOST_LED_ON(USB_LED_CAPS_LOCK) ? true : false;
+
+    if (onMac) {
+        if (isCaps) {
+            SEND_STRING(SS_TAP(X_CAPSLOCK));
+            register_code(KC_LALT);
+            tap_code(osx_mod_key_map[accent]);
+            unregister_code(KC_LALT);
+            register_code(KC_LSFT);
+            tap_code(spanish_letter_key_map[letter]);
+            unregister_code(KC_LSFT);
+            tap_code(KC_CAPS);
+        } else {
+            register_code(KC_LALT);
+            tap_code(osx_mod_key_map[accent]);
+            unregister_code(KC_LALT);
+            tap_code(spanish_letter_key_map[letter]);
+        }
+    } else {
+        /*get the correct decimal unicode*/
+        decimal_unicode_in = isCaps ? spanish_decimal_unicodes[letter][accent][1] : spanish_decimal_unicodes[letter][accent][0];
+        break_int_in_array(decimal_unicode_in, decimal_unicode_size, decimal_unicode_out);
+        register_code(KC_LALT);
+        tap_win_alt_code();
+        unregister_code(KC_LALT);
+    }
+}
+
 
 /*Couple functions used to output the same macro on two different sequences*/
 /* (|) */ 
@@ -279,6 +367,32 @@ void matrix_scan_user(void)
     {
         leading = false;
         leader_end();
+
+        /*  áÁ      => LdrKey > A */
+        SEQ_ONE_KEY(KC_A) {
+            send_spanish_accent(_A, _CUTE);
+        }
+        /*  éÉ      => LdrKey > E */
+        SEQ_ONE_KEY(KC_E) {
+            send_spanish_accent(_E, _CUTE);
+        }
+        /*  íÍ      => LdrKey > I */
+        SEQ_ONE_KEY(KC_I) {
+            send_spanish_accent(_I, _CUTE);
+        }
+        /*  óÓ      => LdrKey > O */
+        SEQ_ONE_KEY(KC_O) {
+            send_spanish_accent(_O, _CUTE);
+        }
+        /*  úÚ      => LdrKey > U */
+        SEQ_ONE_KEY(KC_U) {
+            send_spanish_accent(_U, _CUTE);
+        }
+        /*  ñÑ      => LdrKey > N */
+        SEQ_ONE_KEY(KC_N) {
+            send_spanish_accent(_N, _TILDE);
+        }
+
         /*  CapsLock */
         SEQ_ONE_KEY(KC_LEAD) {
             tap_code(KC_CAPS);
@@ -420,4 +534,4 @@ void leader_end(void) {
     isLeader = false;
 }
 
-#endif /* LEADER */
+#endif

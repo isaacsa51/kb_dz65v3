@@ -41,7 +41,7 @@
 #	define DISABLE_RGB_MATRIX_RAINDROPS           		// Randomly changes a single key's hue
 #	define DISABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS 		// Randomly changes a single key's hue and saturation
 #	define DISABLE_RGB_MATRIX_SOLID_REACTIVE      		// Static single hue, pulses keys hit to shifted hue then fades to current hue
-#endif /* RBG MATRIX */
+#endif
 
 /* Firmware size Optimizations */
 #define NO_ACTION_MACRO
