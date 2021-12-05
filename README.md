@@ -113,7 +113,7 @@ The Leader Key on this layout is triggered by tapping the Capslock key once. Onc
 | Home                                                 | `LDR PAGE-UP`             | n/a                                        |
 | End                                                  | `LDR PAGE-DOWN`           | n/a                                        |
 
-### Spanish Accents (to be added)
+### Spanish Accents
 
 | Output                               | Sequence | Description                                      |
 | :----------------------------------- | :------- | :----------------------------------------------- |
